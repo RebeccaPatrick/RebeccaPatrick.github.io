@@ -1,145 +1,416 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Welcome</title>
-        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-        <style type="text/css">
-            .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr); /* Creates 3 columns */
-            gap: 5%; /* Adjusts the gap between grid items */
-            margin-top: 5%;
-            margin-right: 15%;
-            margin-left: 15%;
-        }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rebecca Patrick – Cosplay Portfolio</title>
+  <!-- Bootstrap + icons (optional) -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
-        .project img {
-            width: 100%; /* Ensures the image covers the container */
-            height: 300px;
-            transition: transform 0.3s ease; /* Smooth transformation */
-            border-radius: 5px; /* Optional: adds rounded corners to images */
-            margin-bottom: 15px;
-            object-fit: cover;
-        }
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      overflow: hidden;
+    }
 
-        .project:hover img {
-            transform: scale(1.2); /* Zooms in the image */
-        }
+    #fullpage {
+      height: 100vh;
+      width: 100vw;
+      position: relative;
+    }
 
-        /* Additional styling for responsiveness */
-        @media (max-width: 768px) {
-            .projects-grid {
-                grid-template-columns: 1fr 1fr; /* Adjusts to 2 columns on smaller screens */
-            }
-        }
-        </style>
-    </head>
+    .project-slide {
+      height: 100vh;
+      width: 100vw;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 2rem 6vw;
+      box-sizing: border-box;
+      color: #1f1f1f;
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      transform: translateY(100%);
+      transition: transform 0.8s ease, opacity 0.8s ease;
+      z-index: 0;
+    }
 
-    <body>
-        <!-- Navbar -->
-        <div class="container-fluid p-0">
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <a class="navbar-brand" href="index.html">Rebecca Patrick</a>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="index.html">My Projects</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="Contact.html">Contact Me</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
+    .project-slide.active {
+      opacity: 1;
+      transform: translateY(0);
+      z-index: 1;
+    }
+
+    .bg-yellow { background:#FEF9C3; }
+    .bg-mint   { background:#D1FAE5; }
+    .bg-lilac  { background:#E0E7FF; }
+    .bg-sky    { background:#CFFAFE; }
+
+    .navbar {
+        background-color: rgba(255, 255, 255, 0.1) 
+        backdrop-filter: blur(10px);
+        transition: background-color 0.3s ease;
+      }
+
+    .navbar.scrolled {
+        background-color: rgba(255, 255, 255, 0.85) !important;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      }
+
+    .navbar-nav .nav-link {
+      position: relative;
+      overflow: hidden;
+      font-weight: 500;
+      color: #000 !important;
+      transition: color 0.3s;
+    }
+
+    .navbar-nav .nav-link::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      height: 2px;
+      width: 0;
+      background-color: #1f1f1f;
+      transition: all 0.3s ease-in-out;
+      transform: translateX(-50%);
+    }
+
+    .navbar-nav .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .carousel-container {
+      flex: 1 1 55%;
+      height: 70%;
+      position: relative;
+      overflow: hidden;
+      border-radius: 1rem;
+      box-shadow: 0 8px 28px rgba(0,0,0,0.25);
+      background: #000;
+      display: flex;
+      align-items: center;
+    }
+
+    .carousel {
+      display: flex;
+      height: 100%;
+      transition: transform 0.6s ease;
+      will-change: transform;
+    }
+
+    .carousel img {
+      max-height: 100%;
+      max-width: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      margin: auto;
+      display: block;
+    }
+
+    .carousel-container {
+      align-items: center;
+      justify-content: center;
+      height: auto;
+      max-height: 80vh;
+    }
+    .carousel-controls {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+    .carousel-controls button {
+      pointer-events: all;
+      background: rgba(255,255,255,0.6);
+      border: none;
+      color: #1f1f1f;
+      font-size: 2rem;
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(4px);
+      cursor: pointer;
+    }
+    .dig-more-btn {
+      display: inline-block;
+      margin-top: 1.5rem;
+      padding: 0.6rem 1.4rem;
+      border: 2px solid #1f1f1f;
+      border-radius: 50px;
+      font-weight: 500;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(6px);
+      color: #1f1f1f;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .dig-more-btn:hover {
+      background: #1f1f1f;
+      color: white;
+    }
+    .project-title-container {
+      flex: 0 1 35%;
+      padding: 1rem 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .project-title {
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 1.2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 28px;
+      height: 46px;
+      border: 2px solid #1f1f1f;
+      border-radius: 25px;
+    }
+    .scroll-indicator::before {
+      content:"";
+      position:absolute;
+      top:8px;
+      left:50%;
+      width:4px;
+      height:8px;
+      background:#1f1f1f;
+      border-radius:4px;
+      transform:translateX(-50%);
+      animation: scroll 2s infinite;
+    }
+
+    .page-indicator {
+      position: absolute;
+      bottom: 2rem;
+      right: 3rem;
+      font-size: 3rem;
+      font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
+      font-weight: 300;
+      color: #1f1f1f;
+      letter-spacing: 1px;
+      opacity: 0.6;
+    }
+    @keyframes scroll {
+      0%   { opacity:0; transform:translate(-50%,4px);}  
+      50%  { opacity:1; transform:translate(-50%,16px);} 
+      100% { opacity:0; transform:translate(-50%,26px);} 
+    }
+
+    @media (max-width: 768px) {
+      .project-slide {
+        flex-direction: column;
+      }
+      .carousel-container, .project-title-container {
+        flex: 1 1 100%;
+      }
+      .project-title-container { padding-top: 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg fixed-top shadow-sm">
+    <a class="navbar-brand" href="#"><i class="fas fa-magic"></i> Rebecca&nbsp;Patrick</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active"><a class="nav-link" href="#">My&nbsp;Projects</a></li>
+        <li class="nav-item"><a class="nav-link" href="Contact.html">Contact&nbsp;Me</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div id="fullpage">
+
+    <section class="project-slide bg-mint active" data-carousel="0">
+      <div class="carousel-container">
+        <div class="carousel" id="carousel-0">
+          <img src="Image/Padmond/1.png" alt="Padmond 1" />
+          <img src="Image/Padmond/2.png" alt="Padmond 2" />
+          <img src="Image/Padmond/3.png" alt="Padmond 3" />
         </div>
-        <!-- End Navbar -->
+        <div class="carousel-controls">
+          <button class="prev" data-carousel="0"><i class="fas fa-chevron-left"></i></button>
+          <button class="next" data-carousel="0"><i class="fas fa-chevron-right"></i></button>
+        </div>
+      </div>
+      <div class="project-title-container">
+        <div class="project-title">Padmond Pondhop - Critical Role</div>
+        <a href="Padmond.html" class="dig-more-btn">Dig More</a>
+      </div>
+      <div class="scroll-indicator"></div>
+      <div class="page-indicator">01/05</div>
+    </section>
 
-        <section id="projects-preview">
-            <div class="projects-grid">
-                <div class="project">
-                    <a href="Avenue Q Puppets.html">
-                        <img src="Image/Avenue Q/1.png" alt="Project 10">
-                        <h4>Avenue Q Puppets</h4>
-                    </a>
-                </div>
-                <div class="project">
-                    <a href="Angel_Dust.html">
-                        <img src="Image/Angel_Dust/5.jpg" alt="Project 10">
-                        <h4>Angel Dust - Hazbin Hotel</h4>
-                    </a>
-                </div>
-                <div class="project">
-                    <a href="Splatoon.html">
-                        <img src="Image/splatoon.png" alt="Project 1">
-                        <h4>Inkling - Splatoon</h4>
-                    </a>
-                </div>
-                <div class="project">
-                    <a href="Bulbasaur.html">
-                        <img src="Image/Bulb.png" alt="Project 2">
-                        <h4>Bulbasaur Inspired Hanfu</h4>
-                    </a>
-                </div>
-                <div class="project">
-                    <a href="Patrick.html">
-                        <img src="Image/pat.png" alt="Project 3">
-                        <h4>Pat Butcher - BBC Ghosts</h4>
-                    </a>
-                </div>
-                <div class="project">
-                    <a href="Tohru.html">
-                        <img src="Image/Tohru.png" alt="Project 4">
-                        <h4>Tohru Honda - Fruits Basket</h4>
-                    </a>
-                </div>
-                <div class="project">
-                    <a href="Seven.html">
-                        <img src="Image/sci.png" alt="Project 5">
-                        <h4>Seven - Scissor Seven</h4>
-                    </a>
-                </div>
-                <div class="project">
-                    <a href="Game.html">
-                        <img src="Image/game.png" alt="Project 6">
-                        <h4>Switch Game Controllers</h4>
-                    </a>
-                </div>
-                <div class="project">
-                    <a href="Candle Box.html">
-                        <img src="Image/Candle Box/3.jpg" alt="Project 7">
-                        <h4>Candle Box Tufting</h4>
-                    </a>
-                </div>
+    <section class="project-slide bg-sky active" data-carousel="0">
+      <div class="carousel-container">
+        <div class="carousel" id="carousel-0">
+          <img src="Image/Avenue Q/1.png" alt="Avenue Q 1" />
+          <img src="Image/Avenue Q/2.png" alt="Avenue Q 2" />
+          <img src="Image/Avenue Q/3.png" alt="Avenue Q 3" />
+          <img src="Image/Avenue Q/4.png" alt="Avenue Q 4" />
+          <img src="Image/Avenue Q/5.png" alt="Avenue Q 5" />
+        </div>
+        <div class="carousel-controls">
+          <button class="prev" data-carousel="0"><i class="fas fa-chevron-left"></i></button>
+          <button class="next" data-carousel="0"><i class="fas fa-chevron-right"></i></button>
+        </div>
+      </div>
+      <div class="project-title-container">
+        <div class="project-title">Avenue Q Puppets</div>
+        <a href="Avenue Q Puppets.html" class="dig-more-btn">Dig More</a>
+      </div>
+      <div class="scroll-indicator"></div>
+      <div class="page-indicator">02/05</div>
+    </section>
 
-                <div class="project">
-                    <a href="Ditto Chair.html">
-                        <img src="Image/Ditto/1.jpg" alt="Project 8">
-                        <h4>Ditto Chair</h4>
-                    </a>
-                </div>
-                <div class="project">
-                    <a href="Pottery.html">
-                        <img src="Image/Pottery/1.jpg" alt="Project 9">
-                        <h4>Pottery</h4>
-                    </a>
-                </div>
-                <div class="project">
-                    <a href="other.html">
-                        <img src="Image/Other/5.png" alt="Other Projects">
-                        <h4>Other</h4>
-                    </a>
-                </div>
-            </div>
-        </section>
+    <section class="project-slide bg-lilac" data-carousel="1">
+      <div class="carousel-container">
+        <div class="carousel" id="carousel-1">
+          <img src="Image/Angel_Dust/5.jpg" alt="Angel Dust 1" />
+          <img src="Image/Angel_Dust/3.jpg" alt="Angel Dust 3" />
+          <img src="Image/Angel_Dust/4.jpg" alt="Angel Dust 4" /> 
+          <img src="Image/Angel_Dust/6.jpg" alt="Angel Dust 2" />         
+        </div>
+        <div class="carousel-controls">
+          <button class="prev" data-carousel="1"><i class="fas fa-chevron-left"></i></button>
+          <button class="next" data-carousel="1"><i class="fas fa-chevron-right"></i></button>
+        </div>
+      </div>
+      <div class="project-title-container">
+        <div class="project-title">Angel Dust – Hazbin Hotel</div>
+        <a href="Angel_Dust.html" class="dig-more-btn">Dig More</a>
+      </div>
+      <div class="scroll-indicator"></div>
+      <div class="page-indicator">03/05</div>
+    </section>
 
-    </body>
+    <section class="project-slide bg-yellow" data-carousel="2">
+      <div class="carousel-container">
+        <div class="carousel" id="carousel-2">
+          <img src="Image/Splatoon/2.png" alt="Splatoon 1" />
+          <img src="Image/Splatoon/3.png" alt="Splatoon 2" />
+          <img src="Image/Splatoon/5.png" alt="Splatoon 3" />
+          <img src="Image/Splatoon/12.png" alt="Splatoon 3" />
+        </div>
+        <div class="carousel-controls">
+          <button class="prev" data-carousel="2"><i class="fas fa-chevron-left"></i></button>
+          <button class="next" data-carousel="2"><i class="fas fa-chevron-right"></i></button>
+        </div>
+      </div>
+      <div class="project-title-container">
+        <div class="project-title">Inkling – Splatoon</div>
+        <a href="Splatoon.html" class="dig-more-btn">Dig More</a>
+      </div>
+      <div class="scroll-indicator"></div>
+      <div class="page-indicator">04/05</div>
+    </section>
+  </div>
+
+  <section class="project-slide bg-lilac" data-carousel="2">
+      <div class="carousel-container">
+        <div class="carousel" id="carousel-2">
+          <img src="1.png" alt="Splatoon 1" />
+          <img src="1.png" alt="Splatoon 2" />
+          <img src="1.png" alt="Splatoon 3" />
+        </div>
+        <div class="carousel-controls">
+          <button class="prev" data-carousel="2"><i class="fas fa-chevron-left"></i></button>
+          <button class="next" data-carousel="2"><i class="fas fa-chevron-right"></i></button>
+        </div>
+      </div>
+      <div class="project-title-container">
+        <div class="project-title">Other Cosplay & Makings</div>
+        <a href="Splatoon.html" class="dig-more-btn">Dig More</a>
+      </div>
+      <div class="page-indicator">05/05</div>
+    </section>
+  </div>
+
+  <script>
+    const slides = document.querySelectorAll('.project-slide');
+    let currentSlide = 0;
+
+    const goToSlide = (n) => {
+      if (n >= 0 && n < slides.length) {
+        slides[currentSlide].classList.remove('active');
+        currentSlide = n;
+        slides[currentSlide].classList.add('active');
+      }
+    }
+
+    let isScrolling = false;
+
+    window.addEventListener('wheel', (e) => {
+      if (isScrolling) return;
+
+      isScrolling = true;
+      if (e.deltaY > 0) goToSlide(currentSlide + 1);
+      else if (e.deltaY < 0) goToSlide(currentSlide - 1);
+
+      setTimeout(() => {
+        isScrolling = false;
+      }, 1000); // 1 second delay
+    }, { passive: true });
+
+
+    /* Carousel */
+    const carousels = document.querySelectorAll('.carousel');
+    const stepTo = (cIdx, dir=1) => {
+      const carousel = carousels[cIdx];
+      const imgs = carousel.children;
+      const w = carousel.clientWidth;
+      let idx = Number(carousel.dataset.idx||0);
+      idx = (idx + dir + imgs.length) % imgs.length;
+      carousel.dataset.idx = idx;
+      carousel.style.transform = `translateX(-${idx*w}px)`;
+    };
+    document.querySelectorAll('.next').forEach(btn=>btn.addEventListener('click', e=>stepTo(Number(e.currentTarget.dataset.carousel),1)));
+    document.querySelectorAll('.prev').forEach(btn=>btn.addEventListener('click', e=>stepTo(Number(e.currentTarget.dataset.carousel),-1)));
+
+    setInterval(()=>{
+      carousels.forEach((c, i)=> stepTo(i,1));
+    }, 3000);
+
+    window.addEventListener('scroll', function() {
+      const navbar = document.querySelector('.navbar');
+      if (window.scrollY > 10) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+
+    window.addEventListener('resize', ()=>{
+      carousels.forEach(c=>{
+        const idx = Number(c.dataset.idx||0);
+        const w = c.clientWidth;
+        c.style.transform = `translateX(-${idx*w}px)`;
+      });
+    });
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
 </html>
