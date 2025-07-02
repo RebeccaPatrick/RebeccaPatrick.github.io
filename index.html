@@ -171,6 +171,7 @@
       align-items: center;
       justify-content: center;
       text-align: center;
+      height: 100%;
     }
     .project-title {
       font-size: clamp(2.2rem, 5vw, 3.8rem);
@@ -243,13 +244,13 @@
   </nav>
 
   <div id="fullpage">
-
     <section class="project-slide bg-mint active" data-carousel="0">
       <div class="carousel-container">
         <div class="carousel" id="carousel-0">
-          <img src="Image/Padmond/1.png" alt="Padmond 1" />
-          <img src="Image/Padmond/2.png" alt="Padmond 2" />
-          <img src="Image/Padmond/3.png" alt="Padmond 3" />
+          <img src="Image/Padmond/1.jpg" alt="Padmond 1" />
+          <img src="Image/Padmond/2.jpg" alt="Padmond 2" />
+          <img src="Image/Padmond/3.jpg" alt="Padmond 3" />
+          <img src="Image/Padmond/4.jpg" alt="Padmond 4" />
         </div>
         <div class="carousel-controls">
           <button class="prev" data-carousel="0"><i class="fas fa-chevron-left"></i></button>
@@ -264,9 +265,9 @@
       <div class="page-indicator">01/05</div>
     </section>
 
-    <section class="project-slide bg-sky active" data-carousel="0">
+    <section class="project-slide bg-sky" data-carousel="1">
       <div class="carousel-container">
-        <div class="carousel" id="carousel-0">
+        <div class="carousel" id="carousel-1">
           <img src="Image/Avenue Q/1.png" alt="Avenue Q 1" />
           <img src="Image/Avenue Q/2.png" alt="Avenue Q 2" />
           <img src="Image/Avenue Q/3.png" alt="Avenue Q 3" />
@@ -274,8 +275,8 @@
           <img src="Image/Avenue Q/5.png" alt="Avenue Q 5" />
         </div>
         <div class="carousel-controls">
-          <button class="prev" data-carousel="0"><i class="fas fa-chevron-left"></i></button>
-          <button class="next" data-carousel="0"><i class="fas fa-chevron-right"></i></button>
+          <button class="prev" data-carousel="1"><i class="fas fa-chevron-left"></i></button>
+          <button class="next" data-carousel="1"><i class="fas fa-chevron-right"></i></button>
         </div>
       </div>
       <div class="project-title-container">
@@ -286,17 +287,17 @@
       <div class="page-indicator">02/05</div>
     </section>
 
-    <section class="project-slide bg-lilac" data-carousel="1">
+    <section class="project-slide bg-lilac" data-carousel="2">
       <div class="carousel-container">
-        <div class="carousel" id="carousel-1">
-          <img src="Image/Angel_Dust/5.jpg" alt="Angel Dust 1" />
+        <div class="carousel" id="carousel-2">
+          <img src="5.jpg" alt="Angel Dust 1" />
           <img src="Image/Angel_Dust/3.jpg" alt="Angel Dust 3" />
           <img src="Image/Angel_Dust/4.jpg" alt="Angel Dust 4" /> 
           <img src="Image/Angel_Dust/6.jpg" alt="Angel Dust 2" />         
         </div>
         <div class="carousel-controls">
-          <button class="prev" data-carousel="1"><i class="fas fa-chevron-left"></i></button>
-          <button class="next" data-carousel="1"><i class="fas fa-chevron-right"></i></button>
+          <button class="prev" data-carousel="2"><i class="fas fa-chevron-left"></i></button>
+          <button class="next" data-carousel="2"><i class="fas fa-chevron-right"></i></button>
         </div>
       </div>
       <div class="project-title-container">
@@ -307,17 +308,17 @@
       <div class="page-indicator">03/05</div>
     </section>
 
-    <section class="project-slide bg-yellow" data-carousel="2">
+    <section class="project-slide bg-yellow" data-carousel="3">
       <div class="carousel-container">
-        <div class="carousel" id="carousel-2">
+        <div class="carousel" id="carousel-3">
           <img src="Image/Splatoon/2.png" alt="Splatoon 1" />
           <img src="Image/Splatoon/3.png" alt="Splatoon 2" />
           <img src="Image/Splatoon/5.png" alt="Splatoon 3" />
           <img src="Image/Splatoon/12.png" alt="Splatoon 3" />
         </div>
         <div class="carousel-controls">
-          <button class="prev" data-carousel="2"><i class="fas fa-chevron-left"></i></button>
-          <button class="next" data-carousel="2"><i class="fas fa-chevron-right"></i></button>
+          <button class="prev" data-carousel="3"><i class="fas fa-chevron-left"></i></button>
+          <button class="next" data-carousel="3"><i class="fas fa-chevron-right"></i></button>
         </div>
       </div>
       <div class="project-title-container">
@@ -329,16 +330,16 @@
     </section>
   </div>
 
-  <section class="project-slide bg-lilac" data-carousel="2">
+  <section class="project-slide bg-lilac" data-carousel="4">
       <div class="carousel-container">
-        <div class="carousel" id="carousel-2">
-          <img src="1.png" alt="Splatoon 1" />
-          <img src="1.png" alt="Splatoon 2" />
-          <img src="1.png" alt="Splatoon 3" />
+        <div class="carousel" id="carousel-4">
+          <img src="Image/Pat/5.jpg" alt="Pat" />
+          <img src="Image/Bulbasaur/13.jpeg" alt="Bulb" />
+          <img src="Image/Tohru/2.png" alt="Tohru" />
         </div>
         <div class="carousel-controls">
-          <button class="prev" data-carousel="2"><i class="fas fa-chevron-left"></i></button>
-          <button class="next" data-carousel="2"><i class="fas fa-chevron-right"></i></button>
+          <button class="prev" data-carousel="4"><i class="fas fa-chevron-left"></i></button>
+          <button class="next" data-carousel="4"><i class="fas fa-chevron-right"></i></button>
         </div>
       </div>
       <div class="project-title-container">
@@ -372,7 +373,7 @@
 
       setTimeout(() => {
         isScrolling = false;
-      }, 1000); // 1 second delay
+      }, 500); // 1 second delay
     }, { passive: true });
 
 
