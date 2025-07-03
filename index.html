@@ -27,10 +27,6 @@
       font-size: clamp(1rem, 2vw, 2rem);
     }
     
-    .scroll-text {
-      font-size: clamp(0.6rem, 1.2vw, 0.9rem);
-    }
-
     .project-slide {
       height: 100vh;
       width: 100vw;
@@ -193,7 +189,7 @@
     }
     .scroll-indicator {
       position: absolute;
-      bottom: 1.2rem;
+      bottom: 1rem;
       left: 50%;
       transform: translateX(-50%);
       width: 28px;
@@ -201,9 +197,28 @@
       border: 2px solid #1f1f1f;
       border-radius: 25px;
     }
+    .scroll-indicator::before {
+      content: "";
+      position: absolute;
+      top: 8px;
+      left: 50%;
+      width: 4px;
+      height: 8px;
+      background: #1f1f1f;
+      border-radius: 4px;
+      transform: translateX(-50%);
+      animation: scroll 2s infinite;
+    }
     .scroll-text {
-      bottom: 2.4rem;
-      font-size: 0.75rem;
+      position: absolute;
+      bottom: 5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #1f1f1f;
+      opacity: 0.7;
+      letter-spacing: 0.5px;
     }
     .page-indicator {
       position: absolute;
@@ -247,7 +262,7 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item active"><a class="nav-link" href="#">My&nbsp;Projects</a></li>
+        <li class="nav-item active"><a class="nav-link" href="My_work.html">My&nbsp;Projects</a></li>
         <li class="nav-item"><a class="nav-link" href="Contact.html">Contact&nbsp;Me</a></li>
       </ul>
     </div>
@@ -257,10 +272,10 @@
     <section class="project-slide bg-mint active" data-carousel="0">
       <div class="carousel-container">
         <div class="carousel" id="carousel-0">
-          <img src="Image/Padmond/1.jpg" alt="Padmond 1" />
-          <img src="Image/Padmond/2.jpg" alt="Padmond 2" />
-          <img src="Image/Padmond/3.jpg" alt="Padmond 3" />
-          <img src="Image/Padmond/4.jpg" alt="Padmond 4" />
+          <img src="1.jpg" alt="Padmond 1" />
+          <img src="2.jpg" alt="Padmond 2" />
+          <img src="3.jpg" alt="Padmond 3" />
+          <img src="4.jpg" alt="Padmond 4" />
         </div>
         <div class="carousel-controls">
           <button class="prev" data-carousel="0"><i class="fas fa-chevron-left"></i></button>
@@ -271,6 +286,7 @@
         <div class="project-title">Padmond Pondhop - Critical Role</div>
         <a href="Padmond.html" class="dig-more-btn">Dig More</a>
       </div>
+      <div class="scroll-text">Scroll Down For More</div>
       <div class="scroll-indicator"></div>
       <div class="page-indicator">01/05</div>
     </section>
@@ -292,6 +308,7 @@
         <div class="project-title">Avenue Q Puppets</div>
         <a href="Avenue Q Puppets.html" class="dig-more-btn">Dig More</a>
       </div>
+      <div class="scroll-text">Scroll Down For More</div>
       <div class="scroll-indicator"></div>
       <div class="page-indicator">02/05</div>
     </section>
@@ -312,6 +329,7 @@
         <div class="project-title">Angel Dust – Hazbin Hotel</div>
         <a href="Angel_Dust.html" class="dig-more-btn">Dig More</a>
       </div>
+      <div class="scroll-text">Scroll Down For More</div>
       <div class="scroll-indicator"></div>
       <div class="page-indicator">03/05</div>
     </section>
@@ -330,6 +348,7 @@
         </div>
       </div>
       <div class="project-title-container">
+        <div class="scroll-text">Scroll Down For More</div>
         <div class="project-title">Inkling – Splatoon</div>
         <a href="Splatoon.html" class="dig-more-btn">Dig More</a>
       </div>
@@ -352,7 +371,7 @@
       </div>
       <div class="project-title-container">
         <div class="project-title">Other Cosplay & Makings</div>
-        <a href="Splatoon.html" class="dig-more-btn">Dig More</a>
+        <a href="My_work.html" class="dig-more-btn">Dig More</a>
       </div>
       <div class="page-indicator">05/05</div>
     </section>
