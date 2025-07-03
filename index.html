@@ -16,17 +16,11 @@
       overflow: hidden;
       overscroll-behavior-y: none;
     }
-
     #fullpage {
       height: 100vh;
       width: 100vw;
       position: relative;
     }
-
-    .page-indicator {
-      font-size: clamp(1rem, 2vw, 2rem);
-    }
-    
     .project-slide {
       height: 100vh;
       width: 100vw;
@@ -44,45 +38,37 @@
       transition: transform 0.8s ease, opacity 0.8s ease;
       z-index: 0;
     }
-
     .project-slide.active {
       opacity: 1;
       transform: translateY(0);
       z-index: 1;
     }
+    .bg-yellow { background: #FEF9C3; }
+    .bg-mint { background: #D1FAE5; }
+    .bg-lilac { background: #E0E7FF; }
+    .bg-sky { background: #CFFAFE; }
 
-    .bg-yellow { background:#FEF9C3; }
-    .bg-mint   { background:#D1FAE5; }
-    .bg-lilac  { background:#E0E7FF; }
-    .bg-sky    { background:#CFFAFE; }
-
-    /* NAVBAR -------------------------------------------------------------- */
     .navbar {
       background-color: rgba(255, 255, 255, 0.1);
       backdrop-filter: blur(10px);
-      transition: background-color 0.3s ease;
+      transition: background-color 0.3s;
     }
-
     .navbar.scrolled {
       background-color: rgba(255, 255, 255, 0.85);
       box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
-
     .navbar-toggler {
       border: none;
       background: transparent;
       font-size: 1.5rem;
       color: #fff;
     }
-
     .navbar-nav .nav-link {
       position: relative;
-      overflow: hidden;
       font-weight: 500;
       color: #fff;
       transition: color 0.3s;
     }
-
     .navbar-nav .nav-link::after {
       content: "";
       position: absolute;
@@ -91,20 +77,18 @@
       height: 2px;
       width: 0;
       background-color: #fff;
-      transition: all 0.3s ease-in-out;
+      transition: all 0.3s;
       transform: translateX(-50%);
     }
-
     .navbar-nav .nav-link:hover::after {
       width: 100%;
     }
 
-    /* CAROUSEL ------------------------------------------------------------ */
     .carousel-container {
       position: relative;
       width: auto;
-      height: 70vh; /* desktop default */
-      aspect-ratio: 3 / 4; 
+      height: 70vh;
+      aspect-ratio: 3/4;
       margin: auto;
       border-radius: 1rem;
       overflow: hidden;
@@ -114,7 +98,6 @@
       align-items: center;
       justify-content: center;
     }
-
     .carousel {
       display: flex;
       height: 100%;
@@ -122,7 +105,6 @@
       transition: transform 0.6s ease;
       will-change: transform;
     }
-
     .carousel img {
       flex: 0 0 100%;
       width: 100%;
@@ -130,7 +112,6 @@
       object-fit: contain;
       background: white;
     }
-
     .carousel-controls {
       position: absolute;
       top: 50%;
@@ -140,7 +121,6 @@
       transform: translateY(-50%);
       pointer-events: none;
     }
-
     .carousel-controls button {
       pointer-events: all;
       background: rgba(255,255,255,0.6);
@@ -156,7 +136,22 @@
       backdrop-filter: blur(4px);
       cursor: pointer;
     }
-
+    .project-title-container {
+      flex: 0 1 35%;
+      padding: 1rem 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      height: 100%;
+    }
+    .project-title {
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
     .dig-more-btn {
       display: inline-block;
       margin-top: 1.5rem;
@@ -168,39 +163,16 @@
       backdrop-filter: blur(6px);
       color: #1f1f1f;
       text-decoration: none;
-      transition: all 0.3s ease;
+      transition: all 0.3s;
     }
-
     .dig-more-btn:hover {
       background: #1f1f1f;
       color: white;
     }
 
-    .project-title-container {
-      flex: 0 1 35%;
-      padding: 1rem 2rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      height: 100%;
-    }
-
-    .project-title {
-      font-size: clamp(2.2rem, 5vw, 3.8rem);
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    /* SCROLL & PAGE INDICATORS ------------------------------------------- */
-    .scroll-indicator,
-    .scroll-text,
-    .page-indicator {
+    .scroll-indicator, .scroll-text, .page-indicator {
       z-index: 2;
     }
-
     .scroll-indicator {
       position: absolute;
       bottom: 1rem;
@@ -211,7 +183,6 @@
       border: 2px solid #1f1f1f;
       border-radius: 25px;
     }
-
     .scroll-indicator::before {
       content: "";
       position: absolute;
@@ -224,7 +195,6 @@
       transform: translateX(-50%);
       animation: scroll 2s infinite;
     }
-
     .scroll-text {
       position: absolute;
       bottom: 5rem;
@@ -236,7 +206,6 @@
       opacity: 0.7;
       letter-spacing: 0.5px;
     }
-
     .page-indicator {
       position: absolute;
       bottom: 2rem;
@@ -248,42 +217,44 @@
       letter-spacing: 1px;
       opacity: 0.6;
     }
-
     @keyframes scroll {
-      0%   { opacity:0; transform:translate(-50%,4px);}  
-      50%  { opacity:1; transform:translate(-50%,16px);} 
-      100% { opacity:0; transform:translate(-50%,26px);} 
+      0% { opacity:0; transform:translate(-50%,4px); }
+      50% { opacity:1; transform:translate(-50%,16px); }
+      100% { opacity:0; transform:translate(-50%,26px); }
     }
 
-    /* MOBILE ----------------------------------------------------------------*/
     @media (max-width: 768px) {
-      /* Allow natural scrolling on mobile */
       html, body {
         overflow-y: auto;
+        height: auto;
       }
-
-      /* Slide layout stacks vertically */
+      #fullpage {
+        height: auto;
+        overflow-y: auto;
+        scroll-snap-type: y mandatory;
+      }
       .project-slide {
+        position: relative;
         flex-direction: column;
         justify-content: flex-start;
+        align-items: center;
         padding: 6rem 4vw 2rem;
+        min-height: 100vh;
+        height: auto;
+        scroll-snap-align: start;
       }
-
-      /* Carousel fills ~80% of screen width & keeps aspect */
       .carousel-container {
-        width: 80vw;
-        height: auto;      /* height follows aspect-ratio */
-        aspect-ratio: 3 / 4;
+        width: 90vw;
+        height: auto;
+        aspect-ratio: 3/4;
       }
-
-      /* Title sits underneath carousel */
+      .project-title {
+        display: none;
+      }
       .project-title-container {
-        flex: 0 0 auto;
         order: 2;
-        margin-top: 1.5rem;
+        margin-top: 1.2rem;
       }
-
-      /* Indicators stay readable */
       .page-indicator {
         font-size: 1.2rem;
         bottom: 0.8rem;
