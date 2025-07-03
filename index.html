@@ -56,28 +56,30 @@
     .bg-lilac  { background:#E0E7FF; }
     .bg-sky    { background:#CFFAFE; }
 
+    /* NAVBAR -------------------------------------------------------------- */
     .navbar {
-        background-color: rgba(255, 255, 255, 0.1) 
-        backdrop-filter: blur(10px);
-        transition: background-color 0.3s ease;
-      }
+      background-color: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      transition: background-color 0.3s ease;
+    }
 
     .navbar.scrolled {
-        background-color: rgba(255, 255, 255, 0.85)
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      }
+      background-color: rgba(255, 255, 255, 0.85);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
     .navbar-toggler {
       border: none;
       background: transparent;
       font-size: 1.5rem;
-      color: #000;
+      color: #fff;
     }
 
     .navbar-nav .nav-link {
       position: relative;
       overflow: hidden;
       font-weight: 500;
-      color: #000;
+      color: #fff;
       transition: color 0.3s;
     }
 
@@ -88,7 +90,7 @@
       left: 50%;
       height: 2px;
       width: 0;
-      background-color: #1f1f1f;
+      background-color: #fff;
       transition: all 0.3s ease-in-out;
       transform: translateX(-50%);
     }
@@ -97,10 +99,11 @@
       width: 100%;
     }
 
+    /* CAROUSEL ------------------------------------------------------------ */
     .carousel-container {
       position: relative;
       width: auto;
-      height: 70vh; 
+      height: 70vh; /* desktop default */
       aspect-ratio: 3 / 4; 
       margin: auto;
       border-radius: 1rem;
@@ -118,7 +121,6 @@
       width: 100%;
       transition: transform 0.6s ease;
       will-change: transform;
-      /*overflow: hidden;*/
     }
 
     .carousel img {
@@ -138,6 +140,7 @@
       transform: translateY(-50%);
       pointer-events: none;
     }
+
     .carousel-controls button {
       pointer-events: all;
       background: rgba(255,255,255,0.6);
@@ -153,6 +156,7 @@
       backdrop-filter: blur(4px);
       cursor: pointer;
     }
+
     .dig-more-btn {
       display: inline-block;
       margin-top: 1.5rem;
@@ -171,6 +175,7 @@
       background: #1f1f1f;
       color: white;
     }
+
     .project-title-container {
       flex: 0 1 35%;
       padding: 1rem 2rem;
@@ -181,12 +186,21 @@
       text-align: center;
       height: 100%;
     }
+
     .project-title {
       font-size: clamp(2.2rem, 5vw, 3.8rem);
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 1px;
     }
+
+    /* SCROLL & PAGE INDICATORS ------------------------------------------- */
+    .scroll-indicator,
+    .scroll-text,
+    .page-indicator {
+      z-index: 2;
+    }
+
     .scroll-indicator {
       position: absolute;
       bottom: 1rem;
@@ -197,6 +211,7 @@
       border: 2px solid #1f1f1f;
       border-radius: 25px;
     }
+
     .scroll-indicator::before {
       content: "";
       position: absolute;
@@ -209,6 +224,7 @@
       transform: translateX(-50%);
       animation: scroll 2s infinite;
     }
+
     .scroll-text {
       position: absolute;
       bottom: 5rem;
@@ -220,6 +236,7 @@
       opacity: 0.7;
       letter-spacing: 0.5px;
     }
+
     .page-indicator {
       position: absolute;
       bottom: 2rem;
@@ -231,24 +248,51 @@
       letter-spacing: 1px;
       opacity: 0.6;
     }
+
     @keyframes scroll {
       0%   { opacity:0; transform:translate(-50%,4px);}  
       50%  { opacity:1; transform:translate(-50%,16px);} 
       100% { opacity:0; transform:translate(-50%,26px);} 
     }
 
+    /* MOBILE ----------------------------------------------------------------*/
     @media (max-width: 768px) {
+      /* Allow natural scrolling on mobile */
+      html, body {
+        overflow-y: auto;
+      }
+
+      /* Slide layout stacks vertically */
+      .project-slide {
+        flex-direction: column;
+        justify-content: flex-start;
+        padding: 6rem 4vw 2rem;
+      }
+
+      /* Carousel fills ~80% of screen width & keeps aspect */
+      .carousel-container {
+        width: 80vw;
+        height: auto;      /* height follows aspect-ratio */
+        aspect-ratio: 3 / 4;
+      }
+
+      /* Title sits underneath carousel */
+      .project-title-container {
+        flex: 0 0 auto;
+        order: 2;
+        margin-top: 1.5rem;
+      }
+
+      /* Indicators stay readable */
       .page-indicator {
         font-size: 1.2rem;
         bottom: 0.8rem;
         right: 0.8rem;
       }
-    
       .scroll-indicator {
         width: 20px;
         height: 30px;
       }
-    
       .scroll-text {
         font-size: 0.7rem;
         bottom: 2rem;
@@ -257,9 +301,12 @@
   </style>
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg fixed-top shadow-sm">
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow-sm">
     <a class="navbar-brand" href="#"><i class="fas fa-magic"></i> Rebecca&nbsp;Patrick</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item active"><a class="nav-link" href="My_work.html">My&nbsp;Projects</a></li>
@@ -268,7 +315,9 @@
     </div>
   </nav>
 
+  <!-- SLIDES -->
   <div id="fullpage">
+    <!-- Slide 1 -->
     <section class="project-slide bg-mint active" data-carousel="0">
       <div class="carousel-container">
         <div class="carousel" id="carousel-0">
@@ -291,6 +340,7 @@
       <div class="page-indicator">01/05</div>
     </section>
 
+    <!-- Slide 2 -->
     <section class="project-slide bg-sky" data-carousel="1">
       <div class="carousel-container">
         <div class="carousel" id="carousel-1">
@@ -313,12 +363,13 @@
       <div class="page-indicator">02/05</div>
     </section>
 
+    <!-- Slide 3 -->
     <section class="project-slide bg-lilac" data-carousel="2">
       <div class="carousel-container">
         <div class="carousel" id="carousel-2">
           <img src="Image/Angel_Dust/3.jpg" alt="Angel Dust 3" />
-          <img src="Image/Angel_Dust/4.jpg" alt="Angel Dust 4" /> 
-          <img src="Image/Angel_Dust/6.jpg" alt="Angel Dust 2" />         
+          <img src="Image/Angel_Dust/4.jpg" alt="Angel Dust 4" />
+          <img src="Image/Angel_Dust/6.jpg" alt="Angel Dust 6" />
         </div>
         <div class="carousel-controls">
           <button class="prev" data-carousel="2"><i class="fas fa-chevron-left"></i></button>
@@ -334,13 +385,14 @@
       <div class="page-indicator">03/05</div>
     </section>
 
+    <!-- Slide 4 -->
     <section class="project-slide bg-yellow" data-carousel="3">
       <div class="carousel-container">
         <div class="carousel" id="carousel-3">
           <img src="Image/Splatoon/2.png" alt="Splatoon 1" />
           <img src="Image/Splatoon/3.png" alt="Splatoon 2" />
           <img src="Image/Splatoon/5.png" alt="Splatoon 3" />
-          <img src="Image/Splatoon/12.png" alt="Splatoon 3" />
+          <img src="Image/Splatoon/12.png" alt="Splatoon 4" />
         </div>
         <div class="carousel-controls">
           <button class="prev" data-carousel="3"><i class="fas fa-chevron-left"></i></button>
@@ -348,16 +400,16 @@
         </div>
       </div>
       <div class="project-title-container">
-        <div class="scroll-text">Scroll Down For More</div>
         <div class="project-title">Inkling – Splatoon</div>
         <a href="Splatoon.html" class="dig-more-btn">Dig More</a>
       </div>
+      <div class="scroll-text">Scroll Down For More</div>
       <div class="scroll-indicator"></div>
       <div class="page-indicator">04/05</div>
     </section>
-  </div>
 
-  <section class="project-slide bg-lilac" data-carousel="4">
+    <!-- Slide 5 -------------------------------------------------------------------->
+    <section class="project-slide bg-lilac" data-carousel="4">
       <div class="carousel-container">
         <div class="carousel" id="carousel-4">
           <img src="Image/Pat/5.jpg" alt="Pat" />
@@ -377,6 +429,7 @@
     </section>
   </div>
 
+  <!-- JS ------------------------------------------------------------------------ -->
   <script>
     const slides = document.querySelectorAll('.project-slide');
     let currentSlide = 0;
@@ -387,77 +440,70 @@
         currentSlide = n;
         slides[currentSlide].classList.add('active');
       }
-    }
+    };
 
     let isScrolling = false;
+    let lastScrollTime = 0;
+    const SCROLL_DELAY = 900; // animation duration + buffer
 
     window.addEventListener('wheel', (e) => {
-      if (isScrolling) return;
+      const now = Date.now();
+      if (now - lastScrollTime < SCROLL_DELAY) return; // skip repeated events
+      lastScrollTime = now;
 
-      isScrolling = true;
-      if (e.deltaY > 0) goToSlide(currentSlide + 1);
-      else if (e.deltaY < 0) goToSlide(currentSlide - 1);
-
-      setTimeout(() => {
-        isScrolling = false;
-      }, 800);
+      if (e.deltaY > 30) goToSlide(currentSlide + 1);
+      else if (e.deltaY < -30) goToSlide(currentSlide - 1);
     }, { passive: true });
 
     let touchStartY = 0;
-
-    window.addEventListener('touchstart', (e) => {
-      touchStartY = e.touches[0].clientY;
-    }, { passive: true });
-    
+    window.addEventListener('touchstart', (e) => { touchStartY = e.touches[0].clientY; }, { passive: true });
     window.addEventListener('touchend', (e) => {
-      const touchEndY = e.changedTouches[0].clientY;
-      const deltaY = touchStartY - touchEndY;
-    
+      const deltaY = touchStartY - e.changedTouches[0].clientY;
       if (Math.abs(deltaY) > 50 && !isScrolling) {
         isScrolling = true;
         if (deltaY > 0) goToSlide(currentSlide + 1);
         else goToSlide(currentSlide - 1);
-    
         setTimeout(() => { isScrolling = false; }, 800);
       }
     }, { passive: true });
 
-
-    /* Carousel */
+    /* Carousel logic ------------------------------------------------------ */
     const carousels = document.querySelectorAll('.carousel');
-    const stepTo = (cIdx, dir=1) => {
+    const stepTo = (cIdx, dir = 1) => {
       const carousel = carousels[cIdx];
       const imgs = carousel.children;
       const w = carousel.clientWidth;
-      let idx = Number(carousel.dataset.idx||0);
+      let idx = Number(carousel.dataset.idx || 0);
       idx = (idx + dir + imgs.length) % imgs.length;
       carousel.dataset.idx = idx;
-      carousel.style.transform = `translateX(-${idx*w}px)`;
+      carousel.style.transform = `translateX(-${idx * w}px)`;
     };
-    document.querySelectorAll('.next').forEach(btn=>btn.addEventListener('click', e=>stepTo(Number(e.currentTarget.dataset.carousel),1)));
-    document.querySelectorAll('.prev').forEach(btn=>btn.addEventListener('click', e=>stepTo(Number(e.currentTarget.dataset.carousel),-1)));
+    document.querySelectorAll('.next').forEach(btn => btn.addEventListener('click', e => stepTo(Number(e.currentTarget.dataset.carousel), 1)));
+    document.querySelectorAll('.prev').forEach(btn => btn.addEventListener('click', e => stepTo(Number(e.currentTarget.dataset.carousel), -1)));
 
-    setInterval(()=>{
-      carousels.forEach((c, i)=> stepTo(i,1));
-    }, 3000);
+    /* Auto-play */
+    setInterval(() => { carousels.forEach((c, i) => stepTo(i, 1)); }, 3000);
 
-    window.addEventListener('scroll', function() {
+    /* Navbar background on scroll */
+    window.addEventListener('scroll', () => {
       const navbar = document.querySelector('.navbar');
-      if (window.scrollY > 10) {
-        navbar.classList.add('scrolled');
-      } else {
-        navbar.classList.remove('scrolled');
-      }
+      if (window.scrollY > 10) navbar.classList.add('scrolled');
+      else navbar.classList.remove('scrolled');
     });
 
-    window.addEventListener('resize', ()=>{
-      carousels.forEach(c=>{
-        const idx = Number(c.dataset.idx||0);
+    /* Recalculate slide width on resize (for carousel translate) */
+    window.addEventListener('resize', () => {
+      carousels.forEach(c => {
+        const idx = Number(c.dataset.idx || 0);
         const w = c.clientWidth;
-        c.style.transform = `translateX(-${idx*w}px)`;
+        c.style.transform = `translateX(-${idx * w}px)`;
       });
     });
   </script>
+
+  <!-- Bootstrap JS + dependencies -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
