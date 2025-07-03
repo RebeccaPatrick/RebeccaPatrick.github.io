@@ -14,12 +14,21 @@
       margin: 0;
       font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       overflow: hidden;
+      overscroll-behavior-y: none;
     }
 
     #fullpage {
       height: 100vh;
       width: 100vw;
       position: relative;
+    }
+
+    .page-indicator {
+      font-size: clamp(1rem, 2vw, 2rem);
+    }
+    
+    .scroll-text {
+      font-size: clamp(0.6rem, 1.2vw, 0.9rem);
     }
 
     .project-slide {
@@ -61,6 +70,12 @@
         background-color: rgba(255, 255, 255, 0.85)
         box-shadow: 0 2px 10px rgba(0,0,0,0.1);
       }
+    .navbar-toggler {
+      border: none;
+      background: transparent;
+      font-size: 1.5rem;
+      color: #000;
+    }
 
     .navbar-nav .nav-link {
       position: relative;
@@ -176,7 +191,6 @@
       text-transform: uppercase;
       letter-spacing: 1px;
     }
-
     .scroll-indicator {
       position: absolute;
       bottom: 1.2rem;
@@ -187,24 +201,15 @@
       border: 2px solid #1f1f1f;
       border-radius: 25px;
     }
-    .scroll-indicator::before {
-      content:"";
-      position:absolute;
-      top:8px;
-      left:50%;
-      width:4px;
-      height:8px;
-      background:#1f1f1f;
-      border-radius:4px;
-      transform:translateX(-50%);
-      animation: scroll 2s infinite;
+    .scroll-text {
+      bottom: 2.4rem;
+      font-size: 0.75rem;
     }
-
     .page-indicator {
       position: absolute;
       bottom: 2rem;
       right: 3rem;
-      font-size: 3rem;
+      font-size: 2rem;
       font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
       font-weight: 300;
       color: #1f1f1f;
@@ -218,13 +223,21 @@
     }
 
     @media (max-width: 768px) {
-      .project-slide {
-        flex-direction: column;
+      .page-indicator {
+        font-size: 1.2rem;
+        bottom: 0.8rem;
+        right: 0.8rem;
       }
-      .carousel-container, .project-title-container {
-        flex: 1 1 100%;
+    
+      .scroll-indicator {
+        width: 20px;
+        height: 30px;
       }
-      .project-title-container { padding-top: 1rem; }
+    
+      .scroll-text {
+        font-size: 0.7rem;
+        bottom: 2rem;
+      }
     }
   </style>
 </head>
