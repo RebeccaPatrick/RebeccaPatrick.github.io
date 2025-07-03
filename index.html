@@ -14,13 +14,15 @@
       margin: 0;
       font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       overflow: hidden;
-      overscroll-behavior-y: none;
     }
+
     #fullpage {
       height: 100vh;
       width: 100vw;
       position: relative;
+      overflow: hidden;
     }
+
     .project-slide {
       height: 100vh;
       width: 100vw;
@@ -38,11 +40,13 @@
       transition: transform 0.8s ease, opacity 0.8s ease;
       z-index: 0;
     }
+
     .project-slide.active {
       opacity: 1;
       transform: translateY(0);
       z-index: 1;
     }
+
     .bg-yellow { background: #FEF9C3; }
     .bg-mint { background: #D1FAE5; }
     .bg-lilac { background: #E0E7FF; }
@@ -86,6 +90,7 @@
 
     .carousel-container {
       position: relative;
+      /*top: 5rem;*/
       width: auto;
       height: 70vh;
       aspect-ratio: 3/4;
@@ -138,7 +143,7 @@
     }
     .project-title-container {
       flex: 0 1 35%;
-      padding: 1rem 2rem;
+      padding: 0.5rem 1rem;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -147,15 +152,15 @@
       height: 100%;
     }
     .project-title {
-      font-size: clamp(2.2rem, 5vw, 3.8rem);
-      font-weight: 800;
+      font-size: clamp(2rem, 5vw, 3.8rem);
+      font-weight: 500;
       text-transform: uppercase;
       letter-spacing: 1px;
     }
     .dig-more-btn {
       display: inline-block;
-      margin-top: 1.5rem;
-      padding: 0.6rem 1.4rem;
+      margin-top: 0rem;
+      padding: 0.5rem 1.2rem;
       border: 2px solid #1f1f1f;
       border-radius: 50px;
       font-weight: 500;
@@ -175,7 +180,7 @@
     }
     .scroll-indicator {
       position: absolute;
-      bottom: 1rem;
+      bottom: 0.5rem;
       left: 50%;
       transform: translateX(-50%);
       width: 28px;
@@ -197,7 +202,7 @@
     }
     .scroll-text {
       position: absolute;
-      bottom: 5rem;
+      bottom: 3.5rem;
       left: 50%;
       transform: translateX(-50%);
       font-size: 0.9rem;
@@ -224,51 +229,53 @@
     }
 
     @media (max-width: 768px) {
-      html, body {
-        overflow: hidden;
-        overflow-y: auto;
-        height: auto;
-      }
-      #fullpage {
-        height: auto;
-        overflow-y: auto;
-        scroll-snap-type: y mandatory;
-      }
       .project-slide {
-        position: relative;
-        flex-direction: column;
+        flex-direction: column; /* 上下排 */
         justify-content: flex-start;
         align-items: center;
         padding: 6rem 4vw 2rem;
-        min-height: 100vh;
-        height: auto;
-        scroll-snap-align: start;
+        height: 100vh;
+        position: absolute; /* 与桌面一样，防止断层 */
+        top: 0;
+        left: 0;
+        transform: translateY(100%);
+        opacity: 0;
+        z-index: 0;
+        transition: transform 0.8s ease, opacity 0.8s ease;
       }
-      .carousel-container {
-        width: 90vw;
-        height: auto;
-        aspect-ratio: 3/4;
+
+      .project-slide.active {
+        opacity: 1;
+        transform: translateY(0);
+        z-index: 1;
       }
-      .project-title {
-        display: none;
-      }
+
       .project-title-container {
         order: 2;
         margin-top: 1.2rem;
+        text-align: center;
       }
-      .page-indicator {
-        font-size: 1.2rem;
-        bottom: 0.8rem;
-        right: 0.8rem;
+
+      .project-title {
+        display: block;
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
       }
-      .scroll-indicator {
-        width: 20px;
-        height: 30px;
+
+      .carousel-container {
+        order: 1;
+        width: 90vw;
+        height: auto;
+        aspect-ratio: 3/4;
+        margin-bottom: 1rem;
       }
+
       .scroll-text {
-        font-size: 0.7rem;
-        bottom: 2rem;
+        order: 3;
+        margin-top: auto;
       }
+    }
     }
   </style>
 </head>
@@ -406,35 +413,34 @@
     const slides = document.querySelectorAll('.project-slide');
     let currentSlide = 0;
 
-    const goToSlide = (n) => {
-      if (n >= 0 && n < slides.length) {
-        slides[currentSlide].classList.remove('active');
-        currentSlide = n;
-        slides[currentSlide].classList.add('active');
-      }
-    };
+    function goToSlide(n) {
+      if (n < 0 || n >= slides.length) return;
+      slides[currentSlide].classList.remove('active');
+      currentSlide = n;
+      slides[currentSlide].classList.add('active');
+    }
 
-    let isScrolling = false;
     let lastScrollTime = 0;
-    const SCROLL_DELAY = 1000; // animation duration + buffer
+    const SCROLL_DELAY = 1000;
 
     window.addEventListener('wheel', (e) => {
       const now = Date.now();
-      if (now - lastScrollTime < SCROLL_DELAY) return; // skip repeated events
+      if (now - lastScrollTime < SCROLL_DELAY) return;
       lastScrollTime = now;
       if (e.deltaY > 30) goToSlide(currentSlide + 1);
       else if (e.deltaY < -30) goToSlide(currentSlide - 1);
     }, { passive: true });
 
     let touchStartY = 0;
-    window.addEventListener('touchstart', (e) => { touchStartY = e.touches[0].clientY; }, { passive: true });
+    window.addEventListener('touchstart', (e) => {
+      touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+
     window.addEventListener('touchend', (e) => {
       const deltaY = touchStartY - e.changedTouches[0].clientY;
-      if (Math.abs(deltaY) > 50 && !isScrolling) {
-        isScrolling = true;
+      if (Math.abs(deltaY) > 50) {
         if (deltaY > 0) goToSlide(currentSlide + 1);
         else goToSlide(currentSlide - 1);
-        setTimeout(() => { isScrolling = false; }, 1000);
       }
     }, { passive: true });
 
