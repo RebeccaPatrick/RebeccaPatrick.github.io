@@ -3,12 +3,99 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Welcome</title>
+        <title>My Cosplay</title>
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Kranky&display=swap" rel="stylesheet">
         <style type="text/css">
+            :root {
+                --text: #ffffff;
+                --bg-img: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), url("Image/BG.png") center top / 100% 100vh no-repeat;
+                --shadow: rgba(0,0,0,0.2);
+            }
+
+            body {
+                margin: 0;
+                min-height: 100vh;
+                color: var(--text) !important;
+            background-color: #e5e5e5 !important;
+            animation: fadeIn 0.4s ease-in-out;
+            }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+            body::before {
+                content: "";
+                position: fixed;
+                inset: 0;
+                z-index: -1;
+                background: var(--bg-img);
+            }
+
+            .logo-nav-container {
+                position: sticky;
+                top: 0;
+                width: 100%;
+                z-index: 100;
+                display: flex;
+                justify-content: center;
+                align-items: flex-start;
+                padding-top: 30px;
+                gap: clamp(10px, 2vw, 40px);
+                flex-wrap: nowrap;
+                min-height: 40vh;
+                background: var(--bg-img);
+            }
+
+            .logo-nav-item {
+                flex: 1 1 0;
+                max-width: 150px;
+                text-align: center;
+                cursor: pointer;
+                transition: transform 0.4s ease, box-shadow 0.4s ease;
+            }
+
+            .logo-nav-item a {
+                text-decoration: none;
+                color: inherit;
+                display: block;
+            }
+
+            .logo-nav-item img {
+                width: 100%;
+                height: 150px;
+                object-fit: contain;
+                border-radius: 14px;
+                transition: transform 0.4s ease, box-shadow 0.4s ease;
+            }
+
+            .logo-nav-item h3 {
+                margin-top: 12px;
+                font-size: 35px;
+                font-weight: 500;
+                letter-spacing: 0.6px;
+                font-family: "Kranky", serif;
+                font-style: normal;
+                color: black;
+                white-space: nowrap;
+            }
+
+            .logo-nav-item:hover {
+                transform: translateY(-10px) scale(1.15);
+                z-index: 4;
+            }
+
+            .logo-nav-item:hover img {
+                box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+            }
+
             .projects-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr); /* Creates 3 columns */
@@ -31,6 +118,45 @@
             transform: scale(1.2); /* Zooms in the image */
         }
 
+        .project h4, .project a {
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .recent-work-title {
+            text-align: center;
+            font-family: "Kranky", serif;
+            font-size: 50px;
+            margin-top: 30px;
+            margin-bottom: 50px;
+            color: black;
+            position: relative;
+            z-index: 1;
+        }
+
+        @media (max-width: 768px) {
+            .logo-nav-container {
+                gap: 2vw;
+                padding: 20px 2vw 0;
+                flex-wrap: nowrap;
+            }
+            .logo-nav-item {
+                width: auto;
+                flex: 1 1 0;
+            }
+            .logo-nav-item img {
+                height: auto;
+                aspect-ratio: 1 / 1;
+                border-radius: 8px;
+            }
+            .logo-nav-item h3 {
+                font-size: clamp(9px, 2.5vw, 14px);
+                margin-top: 6px;
+                white-space: normal;
+                line-height: 1.2;
+            }
+        }
+
         /* Additional styling for responsiveness */
         @media (max-width: 768px) {
             .projects-grid {
@@ -42,109 +168,97 @@
 
     <body>
         <!-- Navbar -->
-        <div class="container-fluid p-0">
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <a class="navbar-brand" href="index.html">Show Case</a>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="My_work.html">My Projects</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="Contact.html">Contact Me</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
+        <div class="logo-nav-container">
+            <div class="logo-nav-item">
+                <a href="index.html">
+                    <img src="Image/logo.png" alt="Home">
+                    <h3>Home</h3>
+                </a>
+            </div>
+            <div class="logo-nav-item">
+                <a href="My_clothes.html">
+                    <img src="Image/clothes.png" alt="Clothes">
+                    <h3>Clothes</h3>
+                </a>
+            </div>
+            <div class="logo-nav-item">
+                <a href="My_work.html">
+                    <img src="Image/cosplay.png" alt="Cosplay">
+                    <h3>Cosplay</h3>
+                </a>
+            </div>
+            <div class="logo-nav-item">
+                <a href="My_puppet.html">
+                    <img src="Image/puppet.png" alt="Puppet">
+                    <h3>Puppet</h3>
+                </a>
+            </div>
+            <div class="logo-nav-item">
+                <a href="My_crochet.html">
+                    <img src="Image/crochet.png" alt="Crochet">
+                    <h3>Crochet</h3>
+                </a>
+            </div>
+            <div class="logo-nav-item">
+                <a href="Contact.html">
+                    <img src="Image/contact.png" alt="Contact Me">
+                    <h3>Me</h3>
+                </a>
+            </div>
         </div>
         <!-- End Navbar -->
 
+        <h1 class="recent-work-title">My Cosplay</h1>
         <section id="projects-preview">
             <div class="projects-grid">
                 <div class="project">
-                    <a href="Padmund.html">
-                        <img src="Image/Padmund/1.jpg" alt="Project 11">
+                    <a href="Cosplay/Padmund.html">
+                        <img src="Cosplay/Image/Padmund/1.jpg" alt="Project 11">
                         <h4>Padmund Pondhop - Critical Role</h4>
                     </a>
                 </div>
                 <div class="project">
-                    <a href="Avenue Q Puppets.html">
-                        <img src="Image/Avenue Q/1.png" alt="Project 10">
-                        <h4>Avenue Q Puppets</h4>
-                    </a>
-                </div>
-                <div class="project">
-                    <a href="Angel_Dust.html">
-                        <img src="Image/Angel_Dust/5.jpg" alt="Project 10">
+                    <a href="Cosplay/Angel_Dust.html">
+                        <img src="Cosplay/Image/Angel_Dust/5.jpg" alt="Project 10">
                         <h4>Angel Dust - Hazbin Hotel</h4>
                     </a>
                 </div>
                 <div class="project">
-                    <a href="Splatoon.html">
-                        <img src="Image/splatoon.png" alt="Project 1">
+                    <a href="Cosplay/Splatoon.html">
+                        <img src="Cosplay/Image/splatoon.png" alt="Project 1">
                         <h4>Inkling - Splatoon</h4>
                     </a>
                 </div>
                 <div class="project">
-                    <a href="Bulbasaur.html">
-                        <img src="Image/Bulb.png" alt="Project 2">
+                    <a href="Cosplay/Bulbasaur.html">
+                        <img src="Cosplay/Image/Bulb.png" alt="Project 2">
                         <h4>Bulbasaur Inspired Hanfu</h4>
                     </a>
                 </div>
                 <div class="project">
-                    <a href="Patrick.html">
-                        <img src="Image/pat.png" alt="Project 3">
+                    <a href="Cosplay/Patrick.html">
+                        <img src="Cosplay/Image/pat.png" alt="Project 3">
                         <h4>Pat Butcher - BBC Ghosts</h4>
                     </a>
                 </div>
                 <div class="project">
-                    <a href="Tohru.html">
-                        <img src="Image/Tohru.png" alt="Project 4">
+                    <a href="Cosplay/Tohru.html">
+                        <img src="Cosplay/Image/Tohru.png" alt="Project 4">
                         <h4>Tohru Honda - Fruits Basket</h4>
                     </a>
                 </div>
                 <div class="project">
-                    <a href="Seven.html">
-                        <img src="Image/sci.png" alt="Project 5">
+                    <a href="Cosplay/Seven.html">
+                        <img src="Cosplay/Image/sci.png" alt="Project 5">
                         <h4>Seven - Scissor Seven</h4>
                     </a>
                 </div>
                 <div class="project">
-                    <a href="Game.html">
-                        <img src="Image/game.png" alt="Project 6">
+                    <a href="Cosplay/Game.html">
+                        <img src="Cosplay/Image/game.png" alt="Project 6">
                         <h4>Switch Game Controllers</h4>
                     </a>
                 </div>
-                <div class="project">
-                    <a href="Candle Box.html">
-                        <img src="Image/Candle Box/3.jpg" alt="Project 7">
-                        <h4>Candle Box Tufting</h4>
-                    </a>
-                </div>
-
-                <div class="project">
-                    <a href="Ditto Chair.html">
-                        <img src="Image/Ditto/1.jpg" alt="Project 8">
-                        <h4>Ditto Chair</h4>
-                    </a>
-                </div>
-                <div class="project">
-                    <a href="Pottery.html">
-                        <img src="Image/Pottery/1.jpg" alt="Project 9">
-                        <h4>Pottery</h4>
-                    </a>
-                </div>
-                <div class="project">
-                    <a href="other.html">
-                        <img src="Image/Other/5.png" alt="Other Projects">
-                        <h4>Other</h4>
-                    </a>
-                </div>
-            </div>
         </section>
 
     </body>

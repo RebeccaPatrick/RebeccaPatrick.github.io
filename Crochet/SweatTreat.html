@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Sweat Treat</title>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+         <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox-plus-jquery.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Kranky&display=swap" rel="stylesheet">
+        <style type="text/css">
+            :root {
+                --text: #ffffff;
+                --bg-img: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), url("../Image/BG.png") center top / 100% 100vh no-repeat;
+                --shadow: rgba(0,0,0,0.2);
+            }
+
+            body {
+                margin: 0;
+                min-height: 100vh;
+                color: var(--text) !important;
+            background-color: #e5e5e5 !important;
+            animation: fadeIn 0.4s ease-in-out;
+            }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+            body::before {
+                content: "";
+                position: fixed;
+                inset: 0;
+                z-index: -1;
+                background: var(--bg-img);
+            }
+
+            .logo-nav-container {
+                position: sticky;
+                top: 0;
+                width: 100%;
+                z-index: 100;
+                display: flex;
+                justify-content: center;
+                align-items: flex-start;
+                padding-top: 30px;
+                gap: clamp(10px, 2vw, 40px);
+                flex-wrap: nowrap;
+                min-height: 40vh;
+                background: var(--bg-img);
+            }
+
+            .logo-nav-item {
+                flex: 1 1 0;
+                max-width: 150px;
+                text-align: center;
+                cursor: pointer;
+                transition: transform 0.4s ease, box-shadow 0.4s ease;
+            }
+
+            .logo-nav-item a {
+                text-decoration: none;
+                color: inherit;
+                display: block;
+            }
+
+            .logo-nav-item img {
+                width: 100%;
+                height: 150px;
+                object-fit: contain;
+                border-radius: 14px;
+                transition: transform 0.4s ease, box-shadow 0.4s ease;
+            }
+
+            .logo-nav-item h3 {
+                margin-top: 12px;
+                font-size: 35px;
+                font-weight: 500;
+                letter-spacing: 0.6px;
+                font-family: "Kranky", serif;
+                font-style: normal;
+                color: black;
+                white-space: nowrap;
+            }
+
+            .logo-nav-item:hover {
+                transform: translateY(-10px) scale(1.15);
+                z-index: 4;
+            }
+
+            .logo-nav-item:hover img {
+                box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+            }
+
+        p {
+            color: black;
+        }
+
+            #introduction {
+                margin: 20px;
+                text-align: justify;
+            }
+
+            #gallery {
+                margin-left: 20%;
+                margin-right: 20%;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 10px;
+            }
+
+            .gallery-img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover; /* This will cover the area of the div without stretching */
+                aspect-ratio: 1 / 1; /* Keeps the image as a square */
+            }
+
+            .recent-work-title {
+                text-align: center;
+                font-family: "Kranky", serif;
+                font-size: 50px;
+                margin-top: 30px;
+                margin-bottom: 50px;
+                color: black;
+                position: relative;
+                z-index: 1;
+            }
+
+            .gallery-img {
+                width: 100%;
+                height: auto;
+                border: 2px solid #f0f0f0;
+
+            }
+
+            @media (max-width: 768px) {
+                .logo-nav-container {
+                    gap: 2vw;
+                    padding: 20px 2vw 0;
+                    flex-wrap: nowrap;
+                }
+                .logo-nav-item {
+                    width: auto;
+                    flex: 1 1 0;
+                }
+                .logo-nav-item img {
+                    height: auto;
+                    aspect-ratio: 1 / 1;
+                    border-radius: 8px;
+                }
+                .logo-nav-item h3 {
+                    font-size: clamp(9px, 2.5vw, 14px);
+                    margin-top: 6px;
+                    white-space: normal;
+                    line-height: 1.2;
+                }
+            }
+        </style>
+
+    </head>
+
+    <body>
+        <!-- Navbar -->
+        <div class="logo-nav-container">
+            <div class="logo-nav-item">
+                <a href="../index.html">
+                    <img src="../Image/logo.png" alt="Home">
+                    <h3>Home</h3>
+                </a>
+            </div>
+            <div class="logo-nav-item">
+                <a href="../My_clothes.html">
+                    <img src="../Image/clothes.png" alt="Clothes">
+                    <h3>Clothes</h3>
+                </a>
+            </div>
+            <div class="logo-nav-item">
+                <a href="../My_work.html">
+                    <img src="../Image/cosplay.png" alt="Cosplay">
+                    <h3>Cosplay</h3>
+                </a>
+            </div>
+            <div class="logo-nav-item">
+                <a href="../My_puppet.html">
+                    <img src="../Image/puppet.png" alt="Puppet">
+                    <h3>Puppet</h3>
+                </a>
+            </div>
+            <div class="logo-nav-item">
+                <a href="../My_crochet.html">
+                    <img src="../Image/crochet.png" alt="Crochet">
+                    <h3>Crochet</h3>
+                </a>
+            </div>
+            <div class="logo-nav-item">
+                <a href="../Contact.html">
+                    <img src="../Image/contact.png" alt="Contact Me">
+                    <h3>Me</h3>
+                </a>
+            </div>
+        </div>
+        <!-- End Navbar -->
+        <main>
+            <h1 class="recent-work-title">Sweat Treats</h1>
+            
+            <section id="introduction">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-md-8">
+                            <br>
+                            <p>This is a collection of a few of the different creations I have made recently or am in the process of crafting.</p>
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="gallery"> 
+                <a href="Image/SweatTreat/1.jpg" data-lightbox="project-gallery" data-title="Project Image 4"><img src="Image/SweatTreat/1.jpg" alt="Project Image 4" class="gallery-img"></a>
+                <a href="Image/SweatTreat/2.jpg" data-lightbox="project-gallery" data-title="Project Image 4"><img src="Image/SweatTreat/2.jpg" alt="Project Image 4" class="gallery-img"></a>
+                <a href="Image/SweatTreat/3.jpg" data-lightbox="project-gallery" data-title="Project Image 1"><img src="Image/SweatTreat/3.jpg" alt="Project Image 1" class="gallery-img"></a>  
+                <a href="Image/SweatTreat/4.jpg" data-lightbox="project-gallery" data-title="Project Image 3"><img src="Image/SweatTreat/4.jpg" alt="Project Image 3" class="gallery-img"></a>
+
+            </section>
+        </main>
+
+    </body>
+</html>
