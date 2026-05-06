@@ -139,6 +139,45 @@
                 text-decoration: none;
             }
 
+            .about-card {
+                background-color: rgba(194, 191, 191, 0.6);
+                color: #333;
+                padding: 40px;
+                border-radius: 15px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+                margin-bottom: 60px;
+                text-align: left;
+            }
+            .about-card p {
+                font-size: 18px;
+                line-height: 1.6;
+            }
+            .awards-list {
+                list-style-type: none;
+                padding: 0;
+            }
+            .awards-list li {
+                background-color: #e7e7e7;
+                margin-bottom: 12px;
+                padding: 15px 20px;
+                border-left: 5px solid #d4af37;
+                border-radius: 6px;
+                font-weight: 500;
+            }
+            .contact-title {
+                font-family: "Kranky", serif;
+                color: black;
+                font-size: 45px;
+            }
+            #introduction a.contact-link {
+                color: black;
+                transition: opacity 0.3s ease;
+            }
+            #introduction a.contact-link:hover {
+                opacity: 0.7;
+                text-decoration: none;
+            }
+
             @media (max-width: 768px) {
                 .logo-nav-container {
                     gap: 2vw;
@@ -214,12 +253,28 @@
                 <div class="container">
                     <div class="row justify-content-center">
                         <div class="col-md-8">
-                            <h1>Contact Me</h1>
-                            <hr>
+                            <div class="about-card">
+                                <p>Aspiring Costume designer and props maker. Graduated at the University of Hertfordshire in Film and Television production. I love volunteering backstage at local theater groups as stage crew and have even worked up to stage manager. I love trying new concepts and crafts.</p>
+                                <p><strong>IMDB Page:</strong> <a href="https://www.imdb.com/name/nm18328615/" target="_blank" style="color: #007bff;">Rebecca Patrick</a></p>
+                                
+                                <h3 style="font-family: 'Kranky', serif; color: black; margin-top: 30px; margin-bottom: 15px;">Awards</h3>
+                                <ul class="awards-list">
+                                    <li>🏆 1st Place — Musical con Lip Sync Battle 2024 (with handmade puppets)</li>
+                                    <li>🏆 1st Place — MCM Lip Sync Battle 2024 (with handmade puppets)</li>
+                                    <li>🏅 3rd Place — Hyper Japan 2023 Cosplay Contest</li>
+                                </ul>
+                            </div>
+
+                            <h1 class="contact-title">Contact Me</h1>
+                            <hr style="border-top: 2px solid black; width: 60%;">
                             <br>
-                            <a href=mailto:rebecca.patrick@outlook.com><h4>rebecca.patrick@outlook.com</h4></a>
+                            <a class="contact-link" href="mailto:rebecca.patrick@outlook.com">
+                                <h4 style="font-family: 'Kranky', serif;">rebecca.patrick@outlook.com</h4>
+                            </a>
                             <br>
-                            <a href=https://www.instagram.com/candle.in.a.box?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==><h4>Instagram candle.in.a.box</h4></a>
+                            <a class="contact-link" href="https://www.instagram.com/candle.in.a.box?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">
+                                <h4 style="font-family: 'Kranky', serif;">Instagram: candle.in.a.box</h4>
+                            </a>
                             <!-- More paragraphs -->
                         </div>
                     </div>
